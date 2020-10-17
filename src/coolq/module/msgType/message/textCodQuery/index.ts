@@ -37,9 +37,9 @@ export class TextCodQuery extends ApiClient {
      */
     async climbTextCod(type: string, word: string): Promise<object> {
         /* 拿东西，进行诶诶啊啊 */
-        const url = 'http://xlboy.cn:8988/getTextCod'
+        const url = `http://xlboy.cn:8988/getTextCod?type=${type}&word=${word}`
         try {
-            const { data } = await axios.post(url, { type, word })
+            const { data } = await axios.get(url)
             return data
         } catch (error) {
             console.error('error', error)
