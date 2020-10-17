@@ -39,7 +39,7 @@ export class TextCodQuery extends ApiClient {
         /* 拿东西，进行诶诶啊啊 */
         const url = 'http://xlboy.cn:8988/getTextCod'
         try {
-            const { data } = await axios.get(url, { params: { type, word } })
+            const { data } = await axios.post(url, { type, word })
             return data
         } catch (error) {
             console.error('error', error)
