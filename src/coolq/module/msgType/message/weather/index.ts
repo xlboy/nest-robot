@@ -15,9 +15,6 @@ export class Weather extends ApiClient {
     judgeRules() {
         /* 判断规则是否通过 */
         const { message, group_id } = this.qqMsg
-        console.log('this.filterList', this.filterList)
-        console.log('group_id------', group_id)
-        console.log('this.filterList.includes', this.filterList.includes(parseInt(group_id)))
         if (this.rules.test(message) &&  !this.filterList.includes(parseInt(group_id))) {
             this.handle() // 规则通过，进来了
         }

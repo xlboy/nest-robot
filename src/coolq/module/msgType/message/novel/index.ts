@@ -9,7 +9,7 @@ export class Novel extends ApiClient {
     judgeRules() {
         /* 判断规则是否通过 */
         const { message } = this.qqMsg
-        if (this.rules.test(message)) {
+        if (this.rules.test(message) && message.length < 50) {
             this.handle() // 规则通过，进来了
         }
     }
