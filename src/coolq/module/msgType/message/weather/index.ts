@@ -14,10 +14,7 @@ export class Weather extends ApiClient {
     judgeRules() {
         /* 判断规则是否通过 */
         const { message, group_id } = this.qqMsg
-        console.log('group_id', +group_id)
-        // console.log('this.qqMsg', this.qqMsg)
-        return 
-        if (this.rules.test(message) && message.length < 30 || !this.filterList.includes(+group_id)) {
+        if (this.rules.test(message) &&  !this.filterList.includes(parseInt(group_id))) {
             this.handle() // 规则通过，进来了
         }
     }
@@ -34,7 +31,7 @@ export class Weather extends ApiClient {
         } else {
             // 不能通过 键名 取出城市对应的cityId，就遍历一遍所有键名，判断是否包含msg关键字
             const fetchWeather = async (val: string) => {
-                const result: string = await this.climbWeather(String(val))
+                const result: string = await this.climbWeather(val)
                 this.sendTextMsg(result)
             }
             const isExist: boolean = Object.entries(city).some(([key, val]) => {

@@ -1,7 +1,7 @@
 import { ApiClient } from "../../../apiClient";
 import axios from 'axios'
 export class TextCodQuery extends ApiClient {
-    protected rules: RegExp = /(?<=^(\^|矧))./ // 验证触发小说规则
+    protected rules: RegExp = /(?<=^(\^|矧))./ // 验证触发查询文字编码规则
     constructor(readonly qqMsg) {
         super(qqMsg)
         this.judgeRules()
@@ -37,10 +37,10 @@ export class TextCodQuery extends ApiClient {
      */
     async climbTextCod(type: string, word: string): Promise<object> {
         /* 拿东西，进行诶诶啊啊 */
-        const url = encodeURI(`http://xlboy.cn:8988/getTextCod?type=${type}&word=${word}`)
+        const url = encodeURI(`http://xlboy.cn:8988/getTextCod`)
         console.log('url', url)
         try {
-            const { data } = await axios.get(url)
+            const { data } = await axios.get(url, { params: { type, word } })
             return data
         } catch (error) {
             console.error('error', error)

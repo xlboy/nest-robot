@@ -3,7 +3,7 @@ import axios from 'axios'
 const userState: object = {} // 用户的开启状态
 
 export class Translation extends ApiClient {
-    protected rules: RegExp = /^(日中|中日|英中|中英|韩中|中韩)/ // 验证规则
+    protected rules: RegExp = /^(日中|中日|英中|中英|韩中|中韩)/ // 验证触发翻译开启的规则，开启后会实时进行翻译，用户每说的一句话都会进行实时翻译
     constructor(readonly qqMsg) {
         super(qqMsg)
         this.judgeRules()
