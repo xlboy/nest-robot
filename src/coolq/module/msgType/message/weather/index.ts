@@ -1,12 +1,13 @@
 import { ApiClient } from "../../../apiClient";
 const city = require('./city.json')
 import axios from 'axios'
+import filterList from "./data/filterList";
 
 const removeLow = (str: string): string => str.replace(/低温 /g, '')
 const removeHigh = (str: string): string => str.replace(/高温 /g, '')
 export class Weather extends ApiClient {
     protected rules: RegExp = /(^|)天气|温度|\d+度|雨|雪|风|冷|热|雷|气温/ // 验证触发天气规则
-    protected filterList: Array<number> = [522394334] // 过滤群名单
+    protected filterList: Array<number> = filterList
     constructor(readonly qqMsg) {
         super(qqMsg)
         this.judgeRules()
@@ -14,6 +15,9 @@ export class Weather extends ApiClient {
     judgeRules() {
         /* 判断规则是否通过 */
         const { message, group_id } = this.qqMsg
+        console.log('this.filterList', this.filterList)
+        console.log('group_id------', group_id)
+        console.log('this.filterList.includes', this.filterList.includes(parseInt(group_id)))
         if (this.rules.test(message) &&  !this.filterList.includes(parseInt(group_id))) {
             this.handle() // 规则通过，进来了
         }
