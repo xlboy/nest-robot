@@ -1,7 +1,7 @@
 import axios, { AxiosInstance } from 'axios'
 import { qqMsg } from 'src/coolq/interface/qqMsg'
 
-const isLocal: boolean = true
+const isLocal: boolean = false
 
 export class ApiClient {
     private apiClient: AxiosInstance
