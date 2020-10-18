@@ -1,11 +1,12 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
 import { CoolqService } from './coolq.service';
+import { qqMsg } from './interface/qqMsg';
 
 @Controller('coolq')
 export class CoolqController {
-    constructor(readonly coolqService: CoolqService) {}
+    constructor(readonly coolqService: CoolqService) { }
     @Post()
-    receiveMsg(@Body() qqMsg) {
+    receiveMsg(@Body() qqMsg: qqMsg) {
         /* 接收机器人发过来的消息数据 */
         switch (qqMsg.post_type) {
             case 'message':

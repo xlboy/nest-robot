@@ -1,11 +1,12 @@
 import { Injectable } from '@nestjs/common';
+import { qqMsg } from './interface/qqMsg';
 import { Novel } from './module/msgType/message/novel';
 import { TextCodQuery } from './module/msgType/message/textCodQuery';
 import { Translation } from './module/msgType/message/translation';
 import { Weather } from './module/msgType/message/weather';
 @Injectable()
 export class CoolqService {
-    messageType(qqMsg) {
+    messageType(qqMsg: qqMsg) {
         new Translation(qqMsg) // 翻译模块
         new Weather(qqMsg) // 天气模块
         new Novel(qqMsg) // 小说模块

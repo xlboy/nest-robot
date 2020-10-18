@@ -1,15 +1,16 @@
 import { ApiClient } from "../../../apiClient";
 import axios from 'axios'
+import { qqMsg } from "src/coolq/interface/qqMsg";
 export class Novel extends ApiClient {
     protected rules: RegExp = /上说|说来|上油|说捏马|小说|看说|打小说|打说/ // 验证触发小说规则
-    constructor(readonly qqMsg) {
+    constructor(readonly qqMsg: qqMsg) {
         super(qqMsg)
         this.judgeRules()
     }
     judgeRules() {
         /* 判断规则是否通过 */
         const { message } = this.qqMsg
-        if (this.rules.test(message) && message.length < 50) {
+        if (this.rules.test(message) && message.length < 15) {
             this.handle() // 规则通过，进来了
         }
     }

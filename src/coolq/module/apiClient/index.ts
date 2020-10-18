@@ -1,13 +1,12 @@
 import axios, { AxiosInstance } from 'axios'
+import { qqMsg } from 'src/coolq/interface/qqMsg'
 
-export interface ApiClientInterface {
-    send: Function // 发送消息的函数
-}
+const isLocal: boolean = true
 
 export class ApiClient {
     private apiClient: AxiosInstance
-    private baseUrl: string = 'http://127.0.0.1:5700/'
-    constructor(readonly qqMsg) {
+    private baseUrl: string = isLocal ? 'http://xlboy.cn:5700' : 'http://127.0.0.1:5700/'
+    constructor(protected readonly qqMsg: qqMsg) {
         this.createApiClient()
     }
     createApiClient() {

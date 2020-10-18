@@ -1,8 +1,13 @@
 import { ApiClient } from "../../../apiClient";
-import axios from 'axios'
+import { qqMsg } from "src/coolq/interface/qqMsg";
+import { CodQuery } from "./codQuery";
+
+
+
 export class TextCodQuery extends ApiClient {
-    protected rules: RegExp = /(?<=^(\^|矧))./ // 验证触发查询文字编码规则
-    constructor(readonly qqMsg) {
+    protected rules: RegExp = /(?<=^(\^|矧))[^码]/ // 验证触发查询文字编码规则，开头以^或矧，并且第二个字不为  码。
+
+    constructor(protected readonly qqMsg: qqMsg) {
         super(qqMsg)
         this.judgeRules()
     }
@@ -16,34 +21,19 @@ export class TextCodQuery extends ApiClient {
     async handle() {
         /* 规则通过了，就进行处理 */
         const { message } = this.qqMsg
-        const type: string = '矧'
-        const [word]: string = message.match(this.rules)
-        const result: any = await this.climbTextCod(type, word)
+        const type: string = '矧' // 默认是矧，当前系统就只提供一个码表的查询，后续如有延伸，小改即可
+        const [word]: any = message.match(this.rules)
+        const codQuery = new CodQuery(type, word)
+        const result: any = codQuery.query()
+
         if (result.code === -5) {
             this.sendTextMsg(result.msg)
         } else {
             const { word, structure, cod } = result
-            const str: string = `▁▂▃▄▅${word}▅▄▃▂▁
+            const str: string = `${type}:${word}
 结构↬ ${structure}
 编码↬ ${cod}`
             this.sendTextMsg(str)
-        }
-    }
-
-    /**
-     * 
-     * @param type 要查询的编码类型
-     * @param word  要查询的字
-     */
-    async climbTextCod(type: string, word: string): Promise<object> {
-        /* 拿东西，进行诶诶啊啊 */
-        const url = `http://xlboy.cn:8988/getTextCod?type=${type}&word=${word}`
-        try {
-            const { data } = await axios.get(url)
-            return data
-        } catch (error) {
-            console.error('error', error)
-            return { code: -5, msg: 'TextCodQuery模块异常，请联系开发人员' }
         }
     }
 }
