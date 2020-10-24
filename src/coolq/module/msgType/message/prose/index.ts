@@ -1,8 +1,9 @@
 import { ApiClient } from "../../../apiClient";
 import axios from 'axios'
+import request from 'request'
 import { IQQMsg } from "src/coolq/interface/IQQMsg";
 export class Novel extends ApiClient {
-    protected rules: RegExp = /上说|说来|上油|说捏马|小说|看说|打小说|打说/ // 验证触发小说规则
+    protected rules: RegExp = /上文|文来|上菜|文捏马|散文|看文|打散文|打文/ // 验证触发散文规则
     constructor(readonly qqMsg: IQQMsg) {
         super(qqMsg)
         this.judgeRules()
@@ -19,7 +20,7 @@ export class Novel extends ApiClient {
         let size: number = +this.qqMsg.message.match(/\d+/) // 取出搜集到的数字，如果搜不到则取个100
         if (size > 0) {
             size = size > 4000 ? 4000 : size // 如果取出的数字大于4000，则给它个最大限制4000
-            const result: string = await this.climbNovel(size)
+            const result: string = await this.climbProse(size)
             this.sendTextMsg(result)
         }
     }
@@ -28,8 +29,8 @@ export class Novel extends ApiClient {
      * 
      * @param size 字数大小
      */
-    public async climbNovel(size: number): Promise<string> {
-        /* 拿东西，进行诶诶啊啊 */
+    public async climbProse(size: number): Promise<string> {
+        /* climb */
         const url: string = `http://xlboy.cn:8988/getNovel?size=${size}`
         try {
             const { data } = await axios.get(url)
