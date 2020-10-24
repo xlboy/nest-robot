@@ -8,10 +8,9 @@ export class CoolqController {
     @Post()
     public receiveMsg(@Body() qqMsg: IQQMsg) {
         /* 接收机器人发过来的消息数据 */
-        console.log('来了来了')
         switch (qqMsg.post_type) {
             case 'message':
-                // axios.post('http://6a4hg2.natappfree.cc', { param: qqMsg })
+                // axios.post('http://6a4hg2.natappfree.cc', { ...qqMsg })
                 this.coolqService.messageType(qqMsg)
                 break;
         }
