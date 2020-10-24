@@ -11,7 +11,7 @@ const initCodJson = (): object => {
     const codJson: object = {}
     const codPath: string = path.resolve() + '/public/service/coolq/cod/'
     const codNames: any = fs.readdirSync(codPath)
-    codNames.forEach(e => {
+    codNames.forEach((e: string) => {
         const codKey: string = e.replace(/\..+/, '')
         const codVal: Buffer = fs.readFileSync(codPath + e)
         codJson[codKey] = iconvLite.decode(codVal, 'utf-8')

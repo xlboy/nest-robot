@@ -7,11 +7,11 @@ export class CodQuery {
      * @param text 要查询的文字
      */
     constructor(protected readonly type: string,
-        protected readonly text: string) {
+                protected readonly text: string) {
 
     }
 
-    query(): object {
+    public query(): object {
         if (typeof codJson[this.type] === 'undefined') {
             return {
                 code: -5,
@@ -20,7 +20,7 @@ export class CodQuery {
         }
         const queryCodRules: RegExp = RegExp(`(?<=\n)${this.text}.+?(?=\n)`);
         // console.log('queryCodRules', queryCodRules)
-         // 这里的text字符，还可能会乱码的，在HTTP传输时，超出五行之外，脱离三千之中的字会乱码。
+        // 这里的text字符，还可能会乱码的，在HTTP传输时，超出五行之外，脱离三千之中的字会乱码。
         // 如果match拿到的是null，则取[]。    
         // [result]取数组中第一个元素，然后判断第一个元素是否为true,如果为true则证明取出了里面的匹配段
         // 如果没取出，为false，就匹配不到咯

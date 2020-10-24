@@ -1,4 +1,4 @@
-export interface qqMsg {
+export interface IQQMsg {
     ClassType: string, // 消息类-类型
     self_id: string, // 接收者ID(QQ)
     sub_type: string, // 提交类型？正常的？

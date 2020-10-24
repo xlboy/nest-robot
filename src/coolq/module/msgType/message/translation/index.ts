@@ -1,15 +1,15 @@
 import { ApiClient } from "../../../apiClient";
 import axios from 'axios'
-import { qqMsg } from "src/coolq/interface/qqMsg";
+import { IQQMsg } from "src/coolq/interface/IQQMsg";
 const userState: object = {} // 用户的开启状态
 
 export class Translation extends ApiClient {
     protected rules: RegExp = /^(日中|中日|英中|中英|韩中|中韩)/ // 验证触发翻译开启的规则，开启后会实时进行翻译，用户每说的一句话都会进行实时翻译
-    constructor(protected readonly qqMsg: qqMsg) {
+    constructor(protected readonly qqMsg: IQQMsg) {
         super(qqMsg)
         this.judgeRules()
     }
-    async judgeRules() {
+    public async judgeRules() {
         /* 判断规则是否通过 */
         const { message, user_id } = this.qqMsg
         if (this.rules.test(message)) {
@@ -20,7 +20,7 @@ export class Translation extends ApiClient {
             this.sendTextMsg(result)
         }
     }
-    async switchHandle() {
+    public async switchHandle() {
         /* 进行开关状态存储  */
         const { message, user_id } = this.qqMsg
         const country: object = {
@@ -54,7 +54,7 @@ export class Translation extends ApiClient {
      * @param t 目标语言
      * @param w 翻译的内容
      */
-    async climbTranslation(f: string, t: string, w: string): Promise<string> {
+    public async climbTranslation(f: string, t: string, w: string): Promise<string> {
         /* 拿东西，进行诶诶啊啊 */
         const url = "http://fy.iciba.com/ajax.php?a=fy";
         const param = new URLSearchParams()

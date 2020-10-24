@@ -1,24 +1,23 @@
 import { ApiClient } from "../../../apiClient";
-import { qqMsg } from "src/coolq/interface/qqMsg";
+import { IQQMsg} from "src/coolq/interface/IQQMsg";
 import { CodQuery } from "./codQuery";
-
 
 
 export class TextCodQuery extends ApiClient {
     protected rules: RegExp = /(?<=^(\^|矧))[^码]/ // 验证触发查询文字编码规则，开头以^或矧，并且第二个字不为  码。
 
-    constructor(protected readonly qqMsg: qqMsg) {
+    constructor(protected readonly qqMsg: IQQMsg) {
         super(qqMsg)
         this.judgeRules()
     }
-    judgeRules() {
+    public judgeRules() {
         /* 判断规则是否通过 */
         const { message } = this.qqMsg
         if (this.rules.test(message)) {
             this.handle() // 规则通过，进来了
         }
     }
-    async handle() {
+    public async handle() {
         /* 规则通过了，就进行处理 */
         const { message } = this.qqMsg
         const type: string = '矧' // 默认是矧，当前系统就只提供一个码表的查询，后续如有延伸，小改即可
