@@ -26,8 +26,9 @@
 ## Module(现有功能)
 
 - Novel - (随机小说)
-- TextCodQuery - (文字编码查询)
-- Translation - (同步翻译)
+- Prose - (随机散文)
+- TextCodQuery - (文字编码查询)(鹤形或其他方案等等)
+- Translation - (实时翻译)
 - Weather - (智能天气)
 
 ## Installation(安装依赖)

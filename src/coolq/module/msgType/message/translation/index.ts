@@ -56,8 +56,8 @@ export class Translation extends ApiClient {
      */
     public async climbTranslation(f: string, t: string, w: string): Promise<string> {
         /* 拿东西，进行诶诶啊啊 */
-        const url = "http://fy.iciba.com/ajax.php?a=fy";
-        const param = new URLSearchParams()
+        const url: string = "http://fy.iciba.com/ajax.php?a=fy";
+        const param: URLSearchParams = new URLSearchParams()
         param.append('f', f)
         param.append('t', t)
         param.append('w', w)
