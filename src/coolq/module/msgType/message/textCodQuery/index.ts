@@ -83,7 +83,7 @@ export class TextCodQuery extends ApiClient {
                 // allCode是全部编码，breakUp是拆分结构，sStroke是开始笔画，e则是结束笔画。sCod是开始的字形编码，eCod则是结束编码
                 const [allCode, breakUp, sStroke, eStroke, sCod, eCod] = results[0]
                 const resultStr: string = `${randomSymbols()} ${word}
-全码↬ ${String(allCode.match(/[a-z]+/))}
+全码↬ ${String(allCode.match(/[a-z].*[a-z]/))}
 拆分↬ ${breakUp}
 首末↬ ${sStroke + eStroke}
 编码↬ ${sCod + eCod}`
