@@ -2,7 +2,7 @@ import { ApiClient } from "../../../apiClient";
 import axios from 'axios'
 import { IQQMsg } from "src/coolq/interface/IQQMsg";
 export class Novel extends ApiClient {
-    protected rules: RegExp = /上说|说来|上油|说捏马|小说|看说|打小说|打说/ // 验证触发小说规则
+    protected rules: RegExp = /上说|说来|上油|说捏马|小说|看说|打小说|打说|键来/ // 验证触发小说规则
     constructor(readonly qqMsg: IQQMsg) {
         super(qqMsg)
         this.judgeRules()

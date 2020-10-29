@@ -7,7 +7,7 @@ import { IQQMsg } from "src/coolq/interface/IQQMsg";
 const removeLow = (str: string): string => str.replace(/低温 /g, '')
 const removeHigh = (str: string): string => str.replace(/高温 /g, '')
 export class Weather extends ApiClient {
-    protected rules: RegExp = /(^|)天气|温度|(\d+|)度|雨|雪|风|冷|热|雷|气温|凉/ // 验证触发天气规则
+    protected rules: RegExp = /(^|)天气|温度|\d*度|雨|雪|风|冷|热|雷|气温|凉/ // 验证触发天气规则
     protected filterList: number[] = filterList
     constructor(protected readonly qqMsg: IQQMsg) {
         super(qqMsg)
