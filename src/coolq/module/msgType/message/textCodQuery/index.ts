@@ -18,7 +18,7 @@ export class TextCodQuery extends ApiClient {
             method: 'localQuery'
         },
         {
-            reg: /(?<=^(\?|？|鹤)).$/,
+            reg: /(?<=^(\?|？|鹤))[^？\?\w]$/,
             method: 'fetchXHQuery'
         }] // 验证规则组，第一个组是本地形式的，第二个组是网络形式（接老范的鹤形）的
 
