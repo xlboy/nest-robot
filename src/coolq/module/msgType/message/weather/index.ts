@@ -17,7 +17,7 @@ export class Weather extends ApiClient {
         /* 判断规则是否通过 */
         // console.log('this.qqMsg', this.qqMsg)
         const { message, group_id } = this.qqMsg
-        if (this.rules.test(message) && !this.filterList.includes(+group_id)) {
+        if (this.rules.test(message) && !this.filterList.includes(+group_id) && message.length < 15) {
             this.handle() // 规则通过，进来了
         }
     }
