@@ -5,6 +5,6 @@ export class AppController {
 
   @Get()
   getHello(): string {
-    return '欢迎访问Nest-Xlboy-Service';
+    return '欢迎访问Nest-Xlboy-Service！';
   }
 }
